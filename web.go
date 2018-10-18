@@ -1,33 +1,25 @@
 package main
 
 import (
-    "strings"
-    "fmt"
-    "net/http"
-    "log"
+	"net/http"
+
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
-func sayHelloName(w http.ResponseWriter, r *http.Request){
-    r.ParseForm()
-    fmt.Println(r.Form)
-    fmt.Println("path: ", r.URL.Path)
-    fmt.Println("scheme: ", r.URL.Scheme)
-    fmt.Println(r.Form["url_long"])
-    for k, v := range r.Form{
-        fmt.Println("key: ", k)
-        fmt.Println("val: ", strings.Join(v, " "))
-    }
-    fmt.Fprintf(w, "hello chain!")
-}
+func main() {
+	// Echo instance
+	e := echo.New()
 
-func Start(){
-    http.HandleFunc("/", sayHelloName)
-    err := http.ListenAndServe(":9090", nil)
-    if err != nil{
-        log.Fatal("ListenAndServe: ", err)
-    }
-}
+	// Middleware
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
-func main(){
-    Start()
+	// Route => handler
+	e.GET("*", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello, World!\n")
+	})
+
+	// Start server
+	e.Logger.Fatal(e.Start(":8520"))
 }
