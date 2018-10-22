@@ -1,4 +1,4 @@
-package main
+package gock
 
 import (
 	"net/http"

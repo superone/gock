@@ -1,11 +1,11 @@
-package main;
+package gock;
  
 import (
     "fmt"
     //"web"
 )
  
-func main() {
+func GockStart() {
     //testpkg.Testpkg()
     fmt.Println("I am main.")
 }
