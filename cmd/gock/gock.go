@@ -1,9 +1,10 @@
 package main;
 
 import(
-	"gock"
+	"command"
 )
 
+
 func main(){
-	gock.GockStart()
+	command.Go()
 }
