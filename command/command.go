@@ -9,14 +9,14 @@ import(
 	"reflect"
 )
 
-func Go(){
+func Go(c chan int){
 	command := ""
-	params := [...]string{}
+	var params []string
     for i, arg := range os.Args[1:] {
 		if (i==0){
 			command = arg 
 		}else{
-			append( params , arg )
+			params = append( params , arg )
 		}
         fmt.Println( i , "::arg =", arg, " arg Type =", reflect.TypeOf(arg))    // 可以把每个字符串参数转换成我们需要的类型
 	}
@@ -25,4 +25,5 @@ func Go(){
 		fmt.Println(strings.EqualFold(command,""))
 		gock.GockStart()
 	}
+	c <- 2
 }
