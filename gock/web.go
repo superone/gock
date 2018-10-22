@@ -6,7 +6,7 @@ import (
     "github.com/labstack/echo/middleware"
 )
 
-func main() {
+func kes() {
 	// Echo instance
 	e := echo.New()
 
@@ -16,9 +16,7 @@ func main() {
 
 	// Route => handler
 	e.GET("*", func(c echo.Context) error {
-        st := text()
-        st_b := text_b()
-		return c.String(http.StatusOK, "Hello, World!\n" + st +"\n" + st_b)
+		return c.String(http.StatusOK, "Hello, World!\n")
 	})
 
 	// Start server
