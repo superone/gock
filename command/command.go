@@ -1,25 +1,28 @@
 package command
 
 import(
-	"path/filepath"
+	_ "path/filepath"
+	"strings"
 	"os"
 	"fmt"
 	"gock"
+	"reflect"
 )
 
 func Go(){
-	fmt.Println(os.Args)
-	fmt.Println(os.Args[:0])
-	fmt.Println(os.Args[:1])
-	fmt.Println(os.Args[:2])
-	//fmt.Println(os.Args[:3])
-
-	
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		fmt.Println(err)
+	command := ""
+	params := [...]string{}
+    for i, arg := range os.Args[1:] {
+		if (i==0){
+			command = arg 
+		}else{
+			append( params , arg )
+		}
+        fmt.Println( i , "::arg =", arg, " arg Type =", reflect.TypeOf(arg))    // 可以把每个字符串参数转换成我们需要的类型
 	}
-	fmt.Println(dir)
-
-	gock.GockStart()
+	fmt.Println(params)
+	if( strings.EqualFold(command,"") ||  strings.EqualFold(command,"run") ){
+		fmt.Println(strings.EqualFold(command,""))
+		gock.GockStart()
+	}
 }
