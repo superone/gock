@@ -1,16 +1,13 @@
 package main;
 
 import(
-	"fmt"
+	_"fmt"
 	"command"
 )
 
 
 func main(){
-	ch := make(chan int)
-	go command.Go( ch )
-	//go done( ch )
-	fmt.Println( <-ch )
+	command.Go()
 }
 
 func done( c chan int){

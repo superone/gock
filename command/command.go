@@ -2,15 +2,15 @@ package command
 
 import(
 	_ "path/filepath"
-	"strings"
+	_"strings"
 	"os"
 	"fmt"
 	"gock"
 	"reflect"
 )
 
-func Go(c chan int){
-	command := ""
+func Go(){
+	command := "run"
 	var params []string
     for i, arg := range os.Args[1:] {
 		if (i==0){
@@ -18,12 +18,14 @@ func Go(c chan int){
 		}else{
 			params = append( params , arg )
 		}
-        fmt.Println( i , "::arg =", arg, " arg Type =", reflect.TypeOf(arg))    // 可以把每个字符串参数转换成我们需要的类型
+        //fmt.Println( i , "::arg =", arg, " arg Type =", reflect.TypeOf(arg))    // 可以把每个字符串参数转换成我们需要的类型
 	}
-	fmt.Println(params)
-	if( strings.EqualFold(command,"") ||  strings.EqualFold(command,"run") ){
-		fmt.Println(strings.EqualFold(command,""))
-		gock.GockStart()
+	
+	switch command {
+		case "run":
+			gock.GockStart(params)
+		default :
+			fmt.Println("None command.")
 	}
-	c <- 2
+	
 }

@@ -1,11 +1,11 @@
 package gock;
  
 import (
-    "fmt"
+    _"fmt"
+    "httpsev"
     //"web"
 )
  
-func GockStart() {
-    //testpkg.Testpkg()
-    fmt.Println("I am main.")
+func GockStart(p []string) {
+    httpsev.Run();
 }
